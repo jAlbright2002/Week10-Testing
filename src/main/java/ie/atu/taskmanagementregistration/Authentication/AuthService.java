@@ -1,8 +1,11 @@
 package ie.atu.taskmanagementregistration.Authentication;
 
 import ie.atu.taskmanagementregistration.Config.JwtConfig;
+import ie.atu.taskmanagementregistration.Config.RabbitMQConfig;
+import ie.atu.taskmanagementregistration.User.Notification;
 import ie.atu.taskmanagementregistration.User.User;
 import ie.atu.taskmanagementregistration.User.UserDB;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -44,5 +47,11 @@ public class AuthService {
         } else {
             return ResponseEntity.status(404).body("User not found");
         }
+    }
+
+    @RabbitListener(queues = "notificationQueue")
+    public ResponseEntity<Notification> receiveNotification(Notification notif) {
+        System.out.println(notif);
+        return ResponseEntity.ok(notif);
     }
 }
