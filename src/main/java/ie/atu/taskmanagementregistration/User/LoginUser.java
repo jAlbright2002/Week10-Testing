@@ -1,4 +1,4 @@
-package ie.atu.taskmanagementregistration.Authentication;
+package ie.atu.taskmanagementregistration.User;
 
 import lombok.Data;
 

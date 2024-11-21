@@ -1,0 +1,13 @@
+Register
+{
+"email": "james@atu.ie",
+"password": "Strong@Password123",
+"firstName": "James",
+"userCategory": "Student"
+}
+
+Login
+{
+"email": "james@atu.ie",
+"password": "Strong@Password123"
+}

@@ -1,5 +1,6 @@
 package ie.atu.taskmanagementregistration.Authentication;
 
+import ie.atu.taskmanagementregistration.User.LoginUser;
 import ie.atu.taskmanagementregistration.User.User;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
