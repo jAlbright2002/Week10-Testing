@@ -1,0 +1,39 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"     # Port for RabbitMQ connections
+      - "15672:15672"   # Port for RabbitMQ management interface
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - microservice-network
+
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"   # MongoDB default port
+    networks:
+      - microservice-network
+
+  task-reg-mgnt:
+    image: br0kestudent/task-reg-mgnt:latest
+    container_name: task-reg-mgnt
+    depends_on:
+      - rabbitmq
+      - mongo
+    environment:
+      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
+      MONGO_URL: mongodb://mongo:27017
+    ports:
+      - "8081:8081"   # Expose the application on port 8081
+    networks:
+      - microservice-network
+
+networks:
+  microservice-network:
+    driver: bridge
